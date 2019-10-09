@@ -63,9 +63,13 @@ public class CalculatorEngine implements ActionListener {
             mark = 1;
             // Calculator.displayField.setText("");
         } else if (screen == Calculator.numButtons[11]) {
-            action = '-';
-            result = displayValue;
-            mark = 1;
+            if (displayValue == 0 && Calculator.displayField.getText().equals(""))
+                Calculator.displayField.setText(ButtonLabel + "0");
+            else {
+                action = '-';
+                result = displayValue;
+                mark = 1;
+            }
         } else if (screen == Calculator.numButtons[3]) {
             action = '/';
             result = displayValue;
