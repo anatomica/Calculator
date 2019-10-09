@@ -51,7 +51,12 @@ public class CalculatorEngine implements ActionListener {
             displayValue = 0;
             Calculator.displayField.setText("");
         } else if (screen == Calculator.numButtons[1]) {
-            Calculator.displayField.setText("");
+            String str = Calculator.displayField.getText();
+            if (str != null && str.length() > 0) {
+                str = str.substring(0, str.length() - 1);
+                Calculator.displayField.setText(str);
+            }
+            //Calculator.displayField.setText("");
         } else if (screen == Calculator.numButtons[15]) {
             action = '+';
             result = displayValue;
