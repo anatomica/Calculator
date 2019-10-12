@@ -8,7 +8,7 @@ public class Calculator extends JFrame{
     }
 
     public static JTextField displayField;
-    public static JButton[] numButtons = new JButton[20];
+    public static JButton[] numButtons = new JButton[24];
 
     public Calculator() {
         super ("Калькулятор");
@@ -26,8 +26,8 @@ public class Calculator extends JFrame{
         contents.add("North", displayField);
 
         // Генерация кнопок
-        String[] button = {"C", "<=", "(^)", "/", "1", "2", "3", "*", "4", "5", "6", "-", "7", "8", "9", "+", "", "0", ".", "="};
-        for (int i = 0 ; i < button.length ; i ++) {
+        String[] button = {"ИМТ", "СКФ", "Муж", "Жен", "C", "<=", "(^)", "/", "1", "2", "3", "*", "4", "5", "6", "-", "7", "8", "9", "+", "", "0", ".", "="};
+        for (int i = 0 ; i < numButtons.length ; i ++) {
             for (int j = 0; j < numButtons.length ; j++) {
                 if (i == j)
                     numButtons[j] = new JButton(button[i]);
@@ -37,11 +37,11 @@ public class Calculator extends JFrame{
         // Размещение кнопок на панели
         JPanel Buttons;
         Buttons = new JPanel();
-        GridLayout layout = new GridLayout(5,4, 5,5);
+        GridLayout layout = new GridLayout(6,4, 5,5);
         Buttons.setLayout(layout);
         for (int i = 0; i < numButtons.length; i++) {
             JButton jButton = numButtons[i];
-            if (i >= 4 && i <= 6 || i >= 8 && i <= 10 || i >= 12 && i <= 14 || i == 17) {
+            if (i >= 8 && i <= 10 || i >= 12 && i <= 14 || i >= 16 && i <= 18 || i == 21) {
                 jButton.setBackground(Color.white);
             }
             Buttons.add(jButton);
