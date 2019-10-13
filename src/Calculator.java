@@ -13,7 +13,7 @@ public class Calculator extends JFrame{
     public Calculator() {
         super ("Калькулятор");
         setSize(350, 500);
-        setLocation(new Point(450, 250));
+        setLocation(new Point(1200, 450));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel contents = new JPanel(new BorderLayout());
 
@@ -22,15 +22,20 @@ public class Calculator extends JFrame{
         displayField.setHorizontalAlignment(SwingConstants.RIGHT);
         displayField.setPreferredSize (new Dimension(350, 100));
         displayField.setBackground(Color.lightGray);
-        displayField.setFont(new Font("Some-Font-Name", Font.BOLD, 35));
+        displayField.setFont(new Font("Some-Font-Name", Font.BOLD, 50));
         contents.add("North", displayField);
 
         // Генерация кнопок
-        String[] button = {"ИМТ", "СКФ", "Муж", "Жен", "C", "<=", "(^)", "/", "1", "2", "3", "*", "4", "5", "6", "-", "7", "8", "9", "+", "", "0", ".", "="};
+        String[] button = {"Жен", "Креат", "СКФ", "ИМТ", "C", "<=", "(^)", "/",
+                "1", "2", "3", "*", "4", "5", "6", "-", "7", "8", "9", "+", "+/-", "0", ".", "="};
         for (int i = 0 ; i < numButtons.length ; i ++) {
             for (int j = 0; j < numButtons.length ; j++) {
-                if (i == j)
+                if (i == j) {
                     numButtons[j] = new JButton(button[i]);
+                    if (i >= 7 && i != 20) {
+                        numButtons[j].setFont(new Font("Some-Font-Name", Font.BOLD, 20));
+                    }
+                }
             }
         }
 

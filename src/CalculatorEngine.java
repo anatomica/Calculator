@@ -7,7 +7,7 @@ public class CalculatorEngine implements ActionListener {
 
     Calculator parent;
     private char action; // Арифметический метод
-    private char sex;
+    private char sex = 'W';
     private double result = 0; // Результат выражения или значения
     private double displayValue = 0; // Значение на экране
     private int mark = 0; // Метка
@@ -46,6 +46,12 @@ public class CalculatorEngine implements ActionListener {
                 ButtonLabel.equals("9") || ButtonLabel.equals("0"))) {
             Calculator.displayField.setText("" + ButtonLabel);
             mark = 0;
+        }
+
+        StringBuilder str1 = new StringBuilder(Calculator.displayField.getText());
+        if (str1.length() > 0 && str1.charAt(0) == '-' && str1.charAt(1) == '0') {
+            str1.deleteCharAt(1);
+            Calculator.displayField.setText(String.valueOf(str1));
         }
 
         // Выбор арифметического действия
@@ -91,18 +97,56 @@ public class CalculatorEngine implements ActionListener {
             action = '^';
             result = displayValue;
             mark = 1;
+        } else if (screen == Calculator.numButtons[0]) {
+            sex = 'W';
+            if (clickedButton.getText().equals("Жен")) {
+                clickedButton.setText("Муж");
+                sex = 'M';
+            } else {
+                clickedButton.setText("Жен");
+                sex = 'W';
+            }
         } else if (screen == Calculator.numButtons[1]) {
-            action = 'S';
+            action = 'K';
             result = displayValue;
             mark = 1;
-        } else if (screen == Calculator.numButtons[0]) {
+        } else if (screen == Calculator.numButtons[2] && displayValue != 0) {
+            double age = Math.pow (0.993, result);
+            double mg = displayValue/88.4;
+            double skf;
+            double GFR = 1;
+            if (sex == 'W' && mg <= 0.7) {
+                skf = Math.pow ((mg/0.7), -0.329);
+                GFR = 144 * skf * age;
+            }
+            if (sex == 'W' && mg > 0.7) {
+                skf = Math.pow ((mg/0.7), -1.209);
+                GFR = 144 * skf * age;
+            }
+            if (sex == 'M' && mg <= 0.9) {
+                skf = Math.pow ((mg/0.9), -0.411);
+                GFR = 141 * skf * age;
+            }
+            if (sex == 'M' && mg > 0.9) {
+                skf = Math.pow ((mg/0.9), -1.209);
+                GFR = 141 * skf * age;
+            }
+            BigDecimal aroundGFR = new BigDecimal(GFR).setScale(0, RoundingMode.HALF_EVEN);
+            Calculator.displayField.setText("" + aroundGFR);
+        } else if (screen == Calculator.numButtons[3]) {
             action = 'I';
             result = displayValue;
             mark = 1;
-        } else if (screen == Calculator.numButtons[2]) {
-            sex = 'M';
-        } else if (screen == Calculator.numButtons[3]) {
-            sex = 'W';
+        } else if (screen == Calculator.numButtons[20]) {
+            StringBuilder str = new StringBuilder(Calculator.displayField.getText());
+            if (str.length() > 0 && str.charAt(0) != '-') {
+                str.insert(0, "-");
+                Calculator.displayField.setText(String.valueOf(str));
+            } else if (str.length() > 0 && str.charAt(0) == '-') {
+                str.deleteCharAt(0);
+                Calculator.displayField.setText(String.valueOf(str));
+            }
+            //Calculator.displayField.setText("");
         } else if (screen == Calculator.numButtons[23]) {
 
             //  Арифметическое действие
@@ -128,7 +172,7 @@ public class CalculatorEngine implements ActionListener {
                     result = result * oldResult;
                 }
                 Calculator.displayField.setText("" + result);
-            } else if (action == 'S') {
+            } else if (action == 'K' && displayValue != 0) {
                 double age = Math.pow (0.993, result);
                 double mg = displayValue/88.4;
                 double skf;
