@@ -11,6 +11,7 @@ public class CalculatorEngine implements ActionListener {
     private double result = 0; // Результат выражения или значения
     private double displayValue = 0; // Значение на экране
     private int mark = 0; // Метка
+    private String value;
 
     CalculatorEngine(Calculator parent) {
         this.parent = parent; // Отсылка на ActionListener в Calculator
@@ -133,6 +134,20 @@ public class CalculatorEngine implements ActionListener {
             }
             BigDecimal aroundGFR = new BigDecimal(GFR).setScale(0, RoundingMode.HALF_EVEN);
             Calculator.displayField.setText("" + aroundGFR);
+            if (GFR > 90)
+                value = "1";
+            if (GFR< 90 && GFR >= 60)
+                value = "2";
+            if (GFR < 60 && GFR >= 45)
+                value = "3а";
+            if (GFR < 45 && GFR >= 30)
+                value = "3б";
+            if (GFR < 30 && GFR >= 15)
+                value = "4";
+            if (GFR < 15 && GFR > 0)
+                value = "5";
+            Calculator.showMessage("СКФ (по формуле CKD-EPI): = " + aroundGFR + " мл/мин/1,73м2\n" +
+                    "Градация " + value + "  (по классификации KDIGO)");
         } else if (screen == Calculator.numButtons[3]) {
             action = 'I';
             result = displayValue;

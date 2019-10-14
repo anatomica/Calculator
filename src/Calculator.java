@@ -7,6 +7,7 @@ public class Calculator extends JFrame{
         new Calculator();
     }
 
+    public static JPanel contents;
     public static JTextField displayField;
     public static JButton[] numButtons = new JButton[24];
 
@@ -15,7 +16,7 @@ public class Calculator extends JFrame{
         setSize(350, 500);
         setLocation(new Point(1200, 450));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel contents = new JPanel(new BorderLayout());
+        contents = new JPanel(new BorderLayout());
 
         // Создание табло
         displayField = new JFormattedTextField();
@@ -64,6 +65,11 @@ public class Calculator extends JFrame{
         // Размещение панели в окне
         setContentPane(contents);
         setVisible (true);
+
+    }
+
+    public static void showMessage (String MessageText) {
+        JOptionPane.showMessageDialog(contents, MessageText);
 
     }
 }
